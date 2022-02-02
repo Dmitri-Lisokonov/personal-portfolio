@@ -1,14 +1,14 @@
-import { collection, CollectionReference, doc, DocumentData, getDocs, setDoc, deleteDoc } from "firebase/firestore";
+import { collection, CollectionReference, doc, DocumentData, getDocs, deleteDoc, updateDoc, setDoc } from "firebase/firestore";
 import db from './firebase';
 
 /**
-    * Generic CRUD class for Firebase.
-    * @param tableName: select database table for this object.
-    */
+* Generic CRUD class for Firebase.
+* @param tableName: database table name
+*/
 
 export class FireBaseObjectService<T> {
-    tableName: string;
-    collectionRef: CollectionReference<DocumentData>;
+    private tableName: string;
+    private collectionRef: CollectionReference<DocumentData>;
 
     /**
      * Gets all documents for table
@@ -43,15 +43,15 @@ export class FireBaseObjectService<T> {
     }
 
     /**
-     * Inserts/updates a document into database collection
-     * @param T: Database entity
+     * Inserts a document into database collection
+     * @param T: database entity
      * @returns boolean
      */
     public async add(object: T) {
         try {
-            const reference = doc(collection(db, this.tableName));
             const obj = JSON.parse(JSON.stringify(object));
-            obj["id"] = reference.id;
+            const reference = doc(this.collectionRef);
+            obj['id'] = reference.id;
             await setDoc(reference, obj);
         }
         catch (e) {
@@ -62,7 +62,7 @@ export class FireBaseObjectService<T> {
 
     /**
      * Deletes a document from database collection
-     * @param T: Database entity
+     * @param T database entity
      * @returns boolean
      */
     public async delete(id: string) {
@@ -74,5 +74,16 @@ export class FireBaseObjectService<T> {
             console.error(e);
             return false;
         }
+    }
+
+
+    /**
+     * Updates or inserts document into collection
+     * @param id object id
+     * @param object updated/new object
+     */
+    public async update(id: string, object: T) {
+        const reference = doc(db, this.tableName, id);
+        await updateDoc(reference, object)
     }
 }
