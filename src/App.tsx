@@ -1,20 +1,29 @@
-import React, { useEffect, useState } from 'react';
-import './App.css';
-import { Table } from './config/Table';
-import { Project } from './entities/Project';
-import { FireBaseObjectService } from './service/FirebaseObjectService';
+import React, { useEffect, useState } from "react";
+import "./App.css";
+import { Table } from "./config/Table";
+import { Project } from "./entities/Project";
+import { app, auth, firebaseFunctions } from "./service/firebase";
+import { FireBaseObjectService } from "./service/FirebaseObjectService";
+import "firebaseui/dist/firebaseui.css"
+import { OAuthLoginComponent } from "./components/GoogleLoginComponent/OAuthLoginComponent";
+import { httpsCallable } from "firebase/functions";
+
+
 
 function App() {
   const [projects, setProjects] = useState([] as Project[]);
   const projectService = new FireBaseObjectService<Project>(Table.PROJECT);
-  console.log(projects);
-
   useEffect(() => {
+    const a = httpsCallable(firebaseFunctions, "helloWorld");
+    a({ data: "Hello from Russia!" })
+      .then((result) => console.log(result))
+      .catch((error) => {
+        console.log('error', error.message);
+      })
     projectService.getAll()
       .then((array) => {
         setProjects(array);
       });
-
   }, [])
 
   const deleteButton = (id: string) => {
@@ -45,8 +54,16 @@ function App() {
     })
   }
 
+
+  const signOut = () => {
+    console.log("ok")
+    auth.signOut();
+  }
+
   return (
-    <div className="App">
+    < div className="App" >
+      <OAuthLoginComponent />
+      Wtf is going on!?!
       {
         projects.length > 0 ?
           projects.map((doc) => {
@@ -55,6 +72,7 @@ function App() {
                 <button onClick={() => deleteButton(doc.id)}>Delete</button>
                 <button onClick={() => updateButton(doc.id, doc)}>Update</button>
                 <button onClick={() => insertButton(doc)}>Copy</button>
+
                 <div>
                   Name: {doc.name}
                 </div>

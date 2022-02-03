@@ -1,5 +1,5 @@
 import { collection, CollectionReference, doc, DocumentData, getDocs, deleteDoc, updateDoc, setDoc } from "firebase/firestore";
-import db from './firebase';
+import { db } from './firebase';
 
 /**
 * Generic CRUD class for Firebase.

@@ -1,0 +1,14 @@
+[debug] [2022-02-03T19:06:33.371Z] ----------------------------------------------------------------------
+[debug] [2022-02-03T19:06:33.377Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\dmitr\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js serve
+[debug] [2022-02-03T19:06:33.378Z] CLI Version:   10.1.4
+[debug] [2022-02-03T19:06:33.378Z] Platform:      win32
+[debug] [2022-02-03T19:06:33.378Z] Node Version:  v14.18.0
+[debug] [2022-02-03T19:06:33.381Z] Time:          Thu Feb 03 2022 20:06:33 GMT+0100 (Central European Standard Time)
+[debug] [2022-02-03T19:06:33.381Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2022-02-03T19:06:33.459Z] Object ".emulators.firestore" in "firebase.json" has unknown property: {"additionalProperty":"rules"}
+[debug] [2022-02-03T19:06:33.463Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2022-02-03T19:06:33.464Z] > authorizing via signed-in user (dmitri.lisokonov@gmail.com)
+[debug] [2022-02-03T19:06:33.464Z] [iam] checking project portfolio-7e0dd for permissions ["firebase.projects.get"]
+[debug] [2022-02-03T19:06:33.466Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/portfolio-7e0dd:testIamPermissions [none]
+[debug] [2022-02-03T19:06:33.466Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/portfolio-7e0dd:testIamPermissions {"permissions":["firebase.projects.get"]}
