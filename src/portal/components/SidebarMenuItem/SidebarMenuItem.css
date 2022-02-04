@@ -1,0 +1,16 @@
+.portal_sidebar-item {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    height: 100%;
+}
+
+.portal_sidebar-item-icon {
+    flex: 1;
+    
+}
+
+.portal_sidebar-item-display_name {
+    flex: 2;
+    width: 100%;
+}

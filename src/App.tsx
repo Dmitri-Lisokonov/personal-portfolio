@@ -9,6 +9,8 @@ import { OAuthLoginComponent } from "./components/GoogleLoginComponent/OAuthLogi
 import { httpsCallable } from "firebase/functions";
 import { AuthContext } from "./context/AuthContext";
 import { RequestObject } from "./entities/RequestObject";
+import LoginPage from "./portal/page/LoginPage/LoginPage";
+import PortalPage from "./portal/page/PortalPage/PortalPage";
 
 
 function App() {
@@ -70,31 +72,8 @@ function App() {
   }
 
   return (
-    < div className="App" >
-      <OAuthLoginComponent />
-      Wtf is going on!?!
-      {
-        projects.length > 0 ?
-          projects.map((doc) => {
-            return (
-              <div key={doc.id}>
-                <button onClick={() => deleteButton(doc.id)}>Delete</button>
-                <button onClick={() => updateButton(doc.id, doc)}>Update</button>
-                <button onClick={() => insertButton(doc)}>Copy</button>
-                <button onClick={() => signOut()}>logout</button>
-
-                <div>
-                  Name: {doc.name}
-                </div>
-                <div>
-                  Body:{doc.description}
-                </div>
-              </div>
-            )
-          })
-          :
-          <div>nope</div>
-      }
+    <div className="app" >
+      <PortalPage />
     </div>
   );
 }

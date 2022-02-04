@@ -1,0 +1,47 @@
+ .main_grid {
+    height: 100%;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 9fr;
+ }
+ 
+ .portal_left-grid {
+    display: grid;
+    width: 100%;
+    height: 100%;
+    grid-template-rows: 1fr;
+}
+
+ .portal-content_grid {
+    display: grid;
+    width: 100%;
+    height: 100%;
+    grid-template-rows: 1fr 8fr;
+ }
+ 
+ .portal-content_header_wrapper {
+   display: flex;
+   flex-direction: column;
+ }
+
+ .portal_content-header_banner {
+   width: 100%;
+   height: 100%;
+ }
+
+ .portal_header-header_navbar {
+   width: 100%;
+   height: 100%;
+ }
+
+ .portal_body-sidebar_wrapper{ 
+   width: 100%;
+   height: 100%;
+ }
+
+ .portal_body-content_wrapper{ 
+   width: 100%;
+   height: 100%;
+}
+ 
+

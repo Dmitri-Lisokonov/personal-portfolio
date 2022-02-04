@@ -6,7 +6,7 @@ export class AuthService {
     public testAuth(data: any) {
         console.log("data: ", data);
         return app.auth().verifyIdToken(data.user.token)
-            .then((claims) => {
+            .then((claims: { admin: boolean; premium: boolean; }) => {
                 if (claims.admin === true) {
                     return new ResponseObject(ResponseStatus.SUCCESS, "You are an admin");
                 }
@@ -17,20 +17,20 @@ export class AuthService {
                     return new ResponseObject(ResponseStatus.SUCCESS, "You are an normal user");
                 }
             })
-            .catch((error) => {
+            .catch(() => {
                 return new ResponseObject(ResponseStatus.SUCCESS, "Something went");
             })
     }
 
     public promoteAdmin(data: any) {
         return app.auth().verifyIdToken(data.user.token)
-            .then((user) => {
+            .then((user: { admin: boolean; }) => {
                 if (user.admin === true) {
                     return app.auth().setCustomUserClaims(data.target, { admin: true })
-                        .then((result) => {
+                        .then(() => {
                             return new ResponseObject(ResponseStatus.SUCCESS, "Promoted to admin")
                         })
-                        .catch((error) => {
+                        .catch(() => {
                             return new ResponseObject(ResponseStatus.FAILED, "Unauthorized")
                         })
                 }
@@ -43,13 +43,13 @@ export class AuthService {
 
     public promotePremium(data: any) {
         return app.auth().verifyIdToken(data.user.token)
-            .then((user) => {
+            .then((user: { admin: boolean; }) => {
                 if (user.admin === true) {
                     return app.auth().setCustomUserClaims(data.target, { premium: true })
-                        .then((result) => {
+                        .then(() => {
                             return new ResponseObject(ResponseStatus.SUCCESS, "Promoted to premium");
                         })
-                        .catch((error) => {
+                        .catch(() => {
                             return new ResponseObject(ResponseStatus.FAILED, "Something went wrong");
                         })
                 }
@@ -58,7 +58,7 @@ export class AuthService {
                 }
 
             })
-            .catch((error) => {
+            .catch(() => {
                 return new ResponseObject(ResponseStatus.FAILED, "Unauthorized");
             })
     }
@@ -66,13 +66,13 @@ export class AuthService {
     public getAllUsers(data: any) {
         //const pageToken = ""
         return app.auth().verifyIdToken(data.user.token)
-            .then((user) => {
+            .then((user: { admin: boolean; }) => {
                 if (user.admin === true) {
                     return app.auth().listUsers(Number(data.target))
-                        .then((result) => {
+                        .then((result: any) => {
                             return new ResponseObject(ResponseStatus.SUCCESS, result);
                         })
-                        .catch((error) => {
+                        .catch(() => {
                             return new ResponseObject(ResponseStatus.FAILED, "Something went wrong");
                         })
                 }
