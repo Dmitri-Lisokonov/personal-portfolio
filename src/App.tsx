@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./App.css";
 import { Table } from "./config/Table";
 import { Project } from "./entities/Project";
@@ -7,24 +7,33 @@ import { FireBaseObjectService } from "./service/FirebaseObjectService";
 import "firebaseui/dist/firebaseui.css"
 import { OAuthLoginComponent } from "./components/GoogleLoginComponent/OAuthLoginComponent";
 import { httpsCallable } from "firebase/functions";
-
+import { AuthContext } from "./context/AuthContext";
+import { RequestObject } from "./entities/RequestObject";
 
 
 function App() {
   const [projects, setProjects] = useState([] as Project[]);
   const projectService = new FireBaseObjectService<Project>(Table.PROJECT);
+  const { currentUser } = useContext(AuthContext);
+
   useEffect(() => {
-    const a = httpsCallable(firebaseFunctions, "helloWorld");
-    a({ data: "Hello from Russia!" })
-      .then((result) => console.log(result))
-      .catch((error) => {
-        console.log('error', error.message);
-      })
     projectService.getAll()
       .then((array) => {
         setProjects(array);
       });
   }, [])
+
+  useEffect(() => {
+    console.log("user", currentUser);
+    const testAuth = httpsCallable(firebaseFunctions, "helloWorld");
+    if (currentUser.token) {
+      testAuth(new RequestObject(currentUser, undefined))
+        .then((result) => console.log(result))
+        .catch((error) => {
+          console.log("error", error.message);
+        })
+    }
+  }, [currentUser])
 
   const deleteButton = (id: string) => {
     projectService.delete(id).then(() => {
@@ -72,6 +81,7 @@ function App() {
                 <button onClick={() => deleteButton(doc.id)}>Delete</button>
                 <button onClick={() => updateButton(doc.id, doc)}>Update</button>
                 <button onClick={() => insertButton(doc)}>Copy</button>
+                <button onClick={() => signOut()}>logout</button>
 
                 <div>
                   Name: {doc.name}

@@ -7,7 +7,7 @@ export const OAuthLoginComponent = () => {
     ui.start('#firebaseui-auth-container', {
         signInOptions: [
             // List of OAuth providers supported.
-            firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+            //firebase.auth.GoogleAuthProvider.PROVIDER_ID,
             firebase.auth.EmailAuthProvider.PROVIDER_ID
 
         ],

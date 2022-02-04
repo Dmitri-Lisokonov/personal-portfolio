@@ -1,19 +1,22 @@
 import * as functions from "firebase-functions";
-import * as admin from "firebase-admin";
-//import * as corsModule from "cors";
-const serviceAccount = require("../src/firebase-admin.json");
-//const cors = require("cors")({ origin: true });
+import { AuthService } from "./service/AuthService";
 
-admin.initializeApp({
-    credential: admin.credential.cert(serviceAccount),
-    databaseURL: "https://portfolio-7e0dd-default-rtdb.europe-west1.firebasedatabase.app"
-});
+const authService = new AuthService();
 
 exports.helloWorld = functions.https.onCall((data, context) => {
-    return {
-        message: "hi"
-    }
-    // cors(req, res, () => {
-    //     res.send(req.body);
-    // })
+    return authService.testAuth(data);
 });
+
+exports.promoteAdmin = functions.https.onCall((data, context) => {
+    return authService.promoteAdmin(data);
+});
+
+exports.promotePremium = functions.https.onCall((data, context) => {
+    return authService.promotePremium(data);
+});
+
+exports.getAllUsers = functions.https.onCall((data, context) => {
+    return authService.getAllUsers(data);
+})
+
+
