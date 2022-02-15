@@ -71,6 +71,7 @@ function App() {
     auth.signOut();
   }
 
+
   return (
     <div className="app" >
       <PortalPage />

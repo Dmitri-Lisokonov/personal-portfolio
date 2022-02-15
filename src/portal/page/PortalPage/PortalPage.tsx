@@ -1,5 +1,4 @@
 import PortalBody from "../../components/Body/PortalBody";
-import PortalHeader from "../../components/Header/PortalHeader";
 import PortalNavbar from "../../components/Navbar/PortalNavbar";
 import PortalSideBar from "../../components/Sidebar/PortalSidebar";
 import "./PortalPage.css";
@@ -13,13 +12,8 @@ const PortalPage = () => {
                 </div>
             </div>
             <div className="portal-content_grid">
-                <div className="portal-content_header_wrapper">
-                    <div className="portal_content-header_banner">
-                        <PortalHeader />
-                    </div>
-                    <div className="portal_header-header_navbar">
-                        <PortalNavbar />
-                    </div>
+                <div className="portal_header_navbar">
+                    <PortalNavbar />
                 </div>
                 <div className="portal_content-content_wrapper">
                     <PortalBody />

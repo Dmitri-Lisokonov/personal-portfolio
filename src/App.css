@@ -3,10 +3,34 @@ body, html {
     margin: 0;
   }
 
-.app{
+body {
+    min-height: 100vh;
+    background-color: var(--body-color);
+    transition: var(--tran-05);
+  }
+
+.app {
   height: 100vh;
   width: 100vw;
   box-sizing: border-box;
   overflow-x: hidden;
   overflow-y: hidden;
   }
+
+  :root {
+    /* ===== Portal Colors ===== */
+    --body-color: #18191a;
+    
+    /* ===== Portal Sidebar Colors ===== */
+    --sidebar-color: #242526;
+    --sidebar-primary-color: #3a3b3c;
+    --sidebar-primary-color-light: #3a3b3c;
+    --sidebar-toggle-color: #fff;
+    --sidebar-text-color: #ccc;
+
+    /* ====== Transition ====== */
+    --tran-03: all 0.6s ease;
+    --tran-03: all 0.3s ease;
+    --tran-04: all 0.3s ease;
+    --tran-05: all 0.3s ease;
+}

@@ -20,6 +20,7 @@ const LoginPage = () => {
                         <div className="fadeIn first">
                             <img src="https://upload-icon.s3.us-east-2.amazonaws.com/uploads/icons/png/9580547601553228570-512.png" id="icon" alt="User Icon" />
                         </div>
+
                         <form>
                             <input type="text" id="login" className="fadeIn second" name="login" placeholder="SIGN IN EMAIL" />
                             <input type="password" id="password" className="fadeIn third" name="login" placeholder="PASSWORD" />
